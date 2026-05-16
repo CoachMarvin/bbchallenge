@@ -100,3 +100,17 @@ btnSpeichern.addEventListener('click', () => {
 		rankingAnzeigen()
 	}
 });
+
+//Admin Bereich
+//Pop Up Fenster - Code eingeben
+const adminCode = prompt("Bitte den Admin Code eingeben (Für Zuschauer einfach abbrechen)");
+
+if (adminCode === "1234") {
+	const formContainer = document.querySelector('.form-container');
+	if (formContainer) {
+		formContainer.style.display = "flex";
+	}
+	alert("Willkommen zurück, Chef! Admin-Modus aktiv.");
+} else {
+	console.log("Als normaler Zuschauer angemeldet");
+}

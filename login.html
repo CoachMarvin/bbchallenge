@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login - Leaderboard</title>
+	<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+	<h1 class="main-title">Anmeldung</h1>
+	
+	<div class="login-box">
+		<input type="text" id="login-username" placeholder="Benutzername / E-Mail">
+		<input type="password" id="login-password" placeholder="Passwort">
+		<button id="btn-login">Einloggen</button>
+		<p id="login-fehler" style="color: #e50914; font-family: 'Changa', sans-serif; margin-top: 10px; display: none;">Falsche Zugangsdaten!</p>
+	</div>
+	
+	<div style="text-align: center; margin-top: 20px;">
+		<a href="index.html" style="color: #aaaaaa; font-family: 'Changa', sans-serif; text-decoration: none; font-style: italic;">Zurück zum Leaderboard</a>
+	</div>
+	
+	<script>
+		//Eine kleine Temporäre Login Prüfung
+		document.getElementById('btn-login').addEventListener('click', () => {
+			const user = document.getElementById('login-username').value.trim();
+			const pass = document.getElementById('login-password').value;
+			const fehlerAnzeige = document.getElementById('login-fehler');
+			
+			if ((user.toLowerCase() === "admin" && pass == "1234") || (user !== "" && pass === "passwort")) {
+				fehlerAnzeige.style.display = "none";
+				localStorage.setItem('angemeldeterUser', user);
+				window.location.href = "profil.html";
+			} else {
+				fehlerAnzeige.style.display = "block";
+			}
+		});
+	</script>
+</body>
+</html>
