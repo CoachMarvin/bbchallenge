@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap');
+
+body {
+	background-color: #121212; /* Ein sehr modernes dunkles Anthrazit */
+	color: #ffffff; /* Reines weiß für die Schrift */
+	font-family: 'Changa', sans-serif; /* Eine saubere, sportliche Schriftart */
+	margin: 0;
+	padding: 20px;
+}
+
+.podium-container {
+	display: flex; /* Aktiviert die Felxbox-Magie */
+	justify-content: center; /* Schiebt das gesamte Treppchen in die Mitte des Bildschirms */
+	align-items: flex-end; /* Richtet die Elemente nach unten aus (Wichtig für die Stufenhöhe!) */
+	gap: 15px; /* Ein bisschen Abstand zu den Plätzen */
+	margin-top: 50px; /* Abstand nach oben zur Überschrift */
+}
+
+.podium-platz {
+	width: 100px; /* Jede Säule ist 100 Pixel breit */
+	background-color: #1e1e1e; /* helleres schwarz, dunkelgrau für die Säulen */
+	border: 2px solid #e50914; /* Ein agressiver, roter Rand */
+	border-radius: 10px 10px 0 0; /* Oben abgerundet, unten flach */
+	padding: 15px 5px; /* Innenabstand, damit der Text nicht am Rand klebt */
+	display: flex; /* Wir aktivieren Flexbox auch innerhalb der Säule */
+	flex-direction: column; /* Der Text wird untereinander gestapelt */
+	align-items: center; /* Alles wird mittig in der Säule zentriert */
+}
+
+.rank-1 {
+	height: 180px; /* Platz 1 ist die höchste Säule */
+	background-color: #e50914; /* Zum Hervorheben, Säule rot */
+}
+
+.rank-2 {
+	height: 130px;
+}
+
+.rank-3 {
+	height: 90px;
+}
+
+.stufe {
+	font-size: 1.5em; 
+	font-weight: bold; /* Macht die Schrift groß und fett */
+	background-color: #ffffff; /* Ein weißer Kreis für Platz 2 und 3 */
+	color: #121212; /* Dunkle Schriftfarbe für den Kontrast */
+	width: 35px; 
+	height: 35px;
+	border-radius: 50%; /* Macht das Quadrat zu einem perfekten Kreis */
+	display: flex; /* Aktiviert Flexbox im Kreis */
+	justify-content: center; /* Zentriert die Zahl waagerecht */
+	align-items: center; /* Zentriert die Zahl senkrecht */
+	margin-top: auto; /* Schiebt den Kreis nach ganz unten in der Säule */
+}
+
+.rank-1 .stufe {
+	background-color: #121212; /* Schwarzer Kreis auf der roten Säule */
+	color: #ffffff; /* Weiße Nummer */
+	border: 2px solid #ffffff; /* Ein feiner weißer Rand */
+}
+
+.spieler-punkte {
+	font-size: 0.9em; /* Macht die Punkte etwas dezenter */
+	font-weight: bold;
+	color: #aaaaaa; /* ein helles Grau */
+	margin-top: 5px; /* Ein kleiner Abstand nach oben zum Kreis */
+}
+
+.rank-1 .spieler-punkte {
+	color: #ffffff; /* Knallweiß für die Punkte auf der roten Säule */
+}
+
+/* Abstand für die gesamte Liste zum Podium */
+.liste-container {
+	max-width: 340px; /* Passt die Breite ans Podium an */
+	margin: 40px auto 0 auto; /* Zentriert die Liste auf dem Bildschirm */
+	display: flex;
+	flex-direction: column; /* Stapelt die Karten untereinander */
+	gap: 10px; /* Abstand zwischen den einzelnen Karten */
+}
+
+/* Das Design für jede einzelne Spieler-Zeile */
+.player-card {
+	background-color: #1e1e1e;
+	border-left: 4px solid #e50914; /* Ein fetter roter Strich nur am linken Rand als Akzent */
+	border-radius: 5px; /* Leicht abgerundete Ecken */
+	padding: 12px 15px; /* Innenabstand */
+	display: flex; /* Aktiviert Flexbox innerhalb der Zeile */
+	flex-direction: row; /* Erzwingt, dass Nummer, Punkte und Name nebeneinander stehen */
+	align-items: center; /* Richtet alle Elemente vertikal mittig aus */
+}
+
+/* Die Platzierungsnummer links */
+.liste-rank {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #e50914;
+	margin-right: 15px; /* Abstand nach rechts zum Namen */
+	min-width: 25px; /* Sorgt dafür, dass zweistellige Nummern nicht die Zeile verschieben */
+}
+
+/* Der Spielername in der Mitte */
+.liste-name {
+	font-size: 1.1em;
+	color: #ffffff;
+	flex-grow: 1; /* Nimmt allen freien Platz ein und schiebt die Punkte nach rechts */
+	text-align: left; /* Name linksbündig */
+}
+
+/* Die Punkte rechts außen */
+.liste-punkte {
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #aaaaaa; /* Grau für die Punkte */
+	background-color: #2a2a2a; /* Ein leicht hellerer Kasten um die Punkte herum */
+	padding: 4px 10px; /* Innenabstand für den Punktekasten */
+	border-radius: 4px; /* Leicht abgerundete Ecken für den Punktekasten */
+	white-space: nowrap; /* Verhindert das Verrutschen in neue Zeile */
+}
+
+/* Das Formular Gehäuse */
+.form-container {
+	max-width: 340px;
+	margin: 20px auto;
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+}
+
+/* Die Eingabefelder */
+.form-container input {
+	background-color: #1e1e1e;
+	border: 2px solid #2a2a2a;
+	border-radius: 5px;
+	color: #ffffff;
+	padding: 8px 10px;
+	font-family: 'Changa', sans-serif;
+	font-style: italic;
+	width: 100px;
+}
+
+/* leuchtender Rand in rot */
+.form-container input:focus {
+	outline: none;
+	border-color: #e50914;
+}
+
+/* Der Eintragen Button */
+.form-container button {
+	background-color: #e50914;
+	color: #ffffff;
+	border: none;
+	border-radius: 5px;
+	padding: 8px 15px;
+	font-family: 'Changa', sans-serif;
+	font-weight: bold;
+	font-style: italic;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+/* Maus Hover */
+.form-container button:hover {
+	background-color: #b20710;
+}
