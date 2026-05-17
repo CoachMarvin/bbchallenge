@@ -17,6 +17,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const podiumContainer = document.querySelector('.podium-container');
+const listeContainer = document.querySelector('.liste-container');
+
 function liveRankingLaden() {
 	const rankingQuery = query(collection(db, "leaderboard"), orderBy("punkte", "desc"));
 	
