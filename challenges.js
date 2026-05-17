@@ -13,7 +13,6 @@ const firebaseConfig = {
     measurementId: "G-9DPK112PLB"
   };
 
-  
 //Firebase & Datenbank-Verbindung 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -87,7 +86,7 @@ if (btnErstellen) {
 				await addDoc(collection(db, "challenges"), {
 					titel: titelInput,
 					beschreibung: beschreibungsInput,
-					erstelltAm: newDate()
+					erstelltAm: new Date()
 				});
 				
 				//Felder leeren, aktualisieren und zurücksetzen
