@@ -1,38 +1,73 @@
-// Start-Daten für die Liste
-const alleChallenges = [
-	{ titel: "100 schnelle Hampelmänner", beschreibung: "Mache 100 Hampelmänner soschnell du kannst!" },
-	{ titel: "Liegestütz-König", beschreibung: "Wie viele saubere Liegestütze schaffst du in einer Minute?" }
-];
+//Firebase Module direkt aus dem Internet laden
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// Exakte Firebase Konfiguration
+const firebaseConfig = {
+    apiKey: "AIzaSyCG-yi8KlJPlDvVTNJEoM3aTa-_O7jP9Rk",
+    authDomain: "basketball-leaderboard-sieglar.firebaseapp.com",
+    projectId: "basketball-leaderboard-sieglar",
+    storageBucket: "basketball-leaderboard-sieglar.firebasestorage.app",
+    messagingSenderId: "158682616904",
+    appId: "1:158682616904:web:df76d3f6b67f3a7e35f47d",
+    measurementId: "G-9DPK112PLB"
+  };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+  
+//Firebase & Datenbank-Verbindung 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const listeContainer = document.getElementById('challenges-liste');
-const deineTelefonnummer = "49015755821997"; //Telefonnumer für Einsendungen
+const deineTelefonnummer = "4915755821997"; //Telefonnumer für Einsendungen
 
-//Challenges auf der Seite zeichnen
-function challengesAnzeigen() {
+//Challenges live laden und anzeigen
+async function cloudChallengesLaden () {
 	if (!listeContainer) return;
-	listeContainer.innerHTML = "";
+	listeContainer.innerHTML = '<p class="loading-text">Lade Challenges aus der Cloud...</p>';
 	
-	alleChallenges.forEach(challenge => {
-		const textFürWhatsApp = encodeURIComponent(`Hi Coach! Ich habe die Challenge "${challenge.titel}" absolviert. Hier ist mein Video:`);
-		const whatsappURL = `https://wa.me/${deineTelefonnummer}?text=${textFürWhatsApp}`;
+	try {
+		const q = query(collection(db, "challenges"));
+		const querySnapshot = await getDocs(q);
 		
-		const karteHTML = `
-			<div class="challenge-card">
-				<h3>${challenge.titel}</h3>
-				<p>${challenge.beschreibung}</p>
-				<a href="${whatsappURL}" target="_blank" class="btn-login-nav btn-whatsapp">Video auf Whatsapp senden</a>
-			</div>
-		`;
-		listeContainer.innerHTML += karteHTML;
-	});
+		listeContainer.innerHTML = "";
+		
+		if (querySnapshot.empty) {
+			listeContainer.innerHTML = '<p class="empty-text">Noch keine Challenges in der Cloud. Erstelle deine erste!</p>';
+			return;
+		}
+		
+		querySnapshot.forEach((doc) => {
+			const challenge = doc.data();
+			
+			const textFürWhatsApp = encodeURIComponent(`Hi Coach! Ich habe die Challenge "${challenge.titel}" absolviert. Hier ist mein Video:`);
+			const whatsappURL = `https://wa.me/${deineTelefonnummer}?text=${textFürWhatsApp}`;
+			
+			//HTML Gerüst
+			const karteHTML = `
+				<div class="challenge-card">
+					<h3>${challenge.titel}</h3>
+					<p>${challenge.beschreibung}</p>
+					<a href="${whatsappURL}" target="_blank" class="btn-login-nav btn-whatsapp">Video auf Whatsapp senden</a>
+				</div>
+			`;
+			listeContainer.innerHTML += karteHTML;
+		});
+	} catch (fehler) {
+		console.error("Fehler beim Laden der Challenges: ", fehler);
+		listeContainer.innerHTML = '<p class="error-text">Fehler beim Laden der Live-Daten</p>';
+	}
 }
 
-//Sofort beim Laden ausführen
-challengesAnzeigen();
+//Sofort Live-Daten laden
+cloudChallengesLaden();
 
-//Admin-Schutz
+//Admin Schutz
 const aktuellEingeloggt = localStorage.getItem('angemeldeterUser');
-const adminForm = document.getElementById('challenge-admin-form');
+const adminForm = document.getElementById('achallenge-admin-form');
 
 if (aktuellEingeloggt && aktuellEingeloggt.toLowerCase() === "admin") {
 	if (adminForm) {
@@ -40,23 +75,37 @@ if (aktuellEingeloggt && aktuellEingeloggt.toLowerCase() === "admin") {
 	}
 }
 
-//Neue Challenge hinzufügen
+//Neue Challenge in die Cloud hochladen
 const btnErstellen = document.getElementById('btn-challenge-erstellen');
 if (btnErstellen) {
-	btnErstellen.addEventListener('click', () => {
+	btnErstellen.addEventListener('click', async () => {
 		const titelInput = document.getElementById('challenge-titel').value.trim();
 		const beschreibungsInput = document.getElementById('challenge-beschreibung').value.trim();
 		
 		if (titelInput !== "" && beschreibungsInput !== "") {
-			alleChallenges.push({
-				titel: titelInput,
-				beschreibung: beschreibungsInput
-			});
+			btnErstellen.innerText = "Speichert...";
+			btnErstellen.disabled = true;
 			
-			//Felder leeren und Liste neu Laden
-			document.getElementById('challenge-titel').value = "";
-			document.getElementById('challenge-beschreibung').value = "";
-			challengesAnzeigen();
+			try {
+				await addDoc(collection(db, "challenges"), {
+					titel: titelInput,
+					beschreibung: beschreibungsInput,
+					erstelltAm: newDate()
+				});
+				
+				//Felder leeren, aktualisieren und zurücksetzen
+				document.getElementById('challenge-titel').value = "";
+				document.getElementById('challenge-beschreibung').value = "";
+				btnErstellen.innerText = "Erstellen";
+				btnErstellen.diabled = false;
+				
+				cloudChallenges();
+			} catch (fehler) {
+				console.error("Fehler beim Speichern in der Cloud: ", fehler);
+				alert("Fehler beim Speichern der Challenge!");
+				btnErstellen.innerText = "Erstellen";
+				btnErstellen.disabled = false;
+			}
 		}
 	});
 }
