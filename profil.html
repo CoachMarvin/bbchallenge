@@ -33,20 +33,47 @@
 		</div>
 	</div>
 	
-	<script>
-		const angemeldeterUser = localStorage.getItem('angemeldeterUser');
+	<script type="module">
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+		import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 		
-		if (!angemeldeterUser) {
-			window.location.href = "login.html";
+		const firebaseConfig = {
+    apiKey: "AIzaSyCG-yi8KlJPlDvVTNJEoM3aTa-_O7jP9Rk",
+    authDomain: "basketball-leaderboard-sieglar.firebaseapp.com",
+    projectId: "basketball-leaderboard-sieglar",
+    storageBucket: "basketball-leaderboard-sieglar.firebasestorage.app",
+    messagingSenderId: "158682616904",
+    appId: "1:158682616904:web:df76d3f6b67f3a7e35f47d",
+    measurementId: "G-9DPK112PLB"
+  };
+  
+	const app = initializeApp(firebaseConfig);
+	const auth = getAuth(app);
+	
+	const welcomeMessage = document.getElementById('welcome-message');
+	const btnLogout = document.getElementById('btn-logout');
+	
+	//Prüfen ob User eingeloggt ist
+	onAuthStateChanged(auth, (user) => {
+		if (user) {
+			if (welcomeMessage) {
+				welcomeMessage.innerText = "Hi, " + user.email + "!";
+			}
 		} else {
-			document.getElementById('welcome-message').innerText = "Hi, " + angemeldeterUser + "!";
-		}
-		
-		//Logout Button aktivieren
-		document.getElementById('btn-logout').addEventListener('click', () => {
-			localStorage.removeItem('angemeldeterUser');
 			window.location.href = "login.html";
+		}
+	});
+	
+	//Abmelden Button aktivieren
+	if (btnlogout) {
+		btnLogout.addEventListener('click', () => {
+			signOut(auth).then(() => {
+				window.location.href = "login.html";
+			}).catch((error) => {
+				alert("Fehler beim Abmelden!");
+			});
 		});
+	}
 	</script>
 </body>
 </html>
