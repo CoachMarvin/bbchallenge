@@ -95,7 +95,7 @@ if (btnErstellen) {
 				btnErstellen.innerText = "Erstellen";
 				btnErstellen.diabled = false;
 				
-				cloudChallenges();
+				cloudChallengesLaden();
 			} catch (fehler) {
 				console.error("Fehler beim Speichern in der Cloud: ", fehler);
 				alert("Fehler beim Speichern der Challenge!");
