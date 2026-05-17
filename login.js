@@ -22,7 +22,7 @@ const errorAnzeige = document.getElementById('login-fehler');
 if (btnLogin) {
 	btnLogin.addEventListener('click', async () => {
 		const email = document.getElementById('login-username').value.trim();
-		const passwort = document.getElementById('login-passwort').value;
+		const passwort = document.getElementById('login-password').value;
 		
 		if (errorAnzeige) errorAnzeige.style.display = "none";
 		
