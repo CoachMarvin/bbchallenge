@@ -30,21 +30,7 @@
 		<a href="index.html" style="color: #aaaaaa; font-family: 'Changa', sans-serif; text-decoration: none; font-style: italic;">Zurück zum Leaderboard</a>
 	</div>
 	
-	<script>
-		//Eine kleine Temporäre Login Prüfung
-		document.getElementById('btn-login').addEventListener('click', () => {
-			const user = document.getElementById('login-username').value.trim();
-			const pass = document.getElementById('login-password').value;
-			const fehlerAnzeige = document.getElementById('login-fehler');
-			
-			if ((user.toLowerCase() === "admin" && pass == "19012002") || (user !== "" && pass === "passwort")) {
-				fehlerAnzeige.style.display = "none";
-				localStorage.setItem('angemeldeterUser', user);
-				window.location.href = "profil.html";
-			} else {
-				fehlerAnzeige.style.display = "block";
-			}
-		});
+	<script type="module" src="login.js">
 	</script>
 </body>
 </html>
