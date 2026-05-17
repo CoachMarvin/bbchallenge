@@ -1,6 +1,7 @@
 //Firebase Module direkt aus dem Internet laden
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 // Exakte Firebase Konfiguration
 const firebaseConfig = {
@@ -16,6 +17,7 @@ const firebaseConfig = {
 //Firebase & Datenbank-Verbindung 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 const listeContainer = document.getElementById('challenges-liste');
 const deineTelefonnummer = "4915755821997"; //Telefonnumer für Einsendungen
@@ -61,15 +63,22 @@ async function cloudChallengesLaden() {
 //Sofort Live-Daten laden
 cloudChallengesLaden();
 
-//Admin Schutz
-const aktuellEingeloggt = localStorage.getItem('angemeldeterUser');
-const adminForm = document.querySelector('#challenge-admin-form');
+//Admin-Schutz
+const adminForm = document.getElementById('challenge-admin-form');
 
-if (aktuellEingeloggt && aktuellEingeloggt.toLowerCase() === "admin") {
-	if (adminForm) {
-		adminForm.style.setProperty('display', 'flex', 'important');
+onAuthStateChanged(auth, (user) => {
+	if (user) {
+		console.log("Hintergrund-Check Challenges: Admin ist eingeloggt!");
+		if (adminForm) {
+			adminForm.style.setProperty('display', 'flex', 'important');
+		}
+	} else {
+		console.log("Hintergrund-Check Challenges: Kein Admin eingeloggt.");
+		if (adminForm) {
+			adminForm.style.setProperty('display', 'none', 'important');
+		}
 	}
-}
+});
 
 //Neue Challenge in die Cloud hochladen
 const btnErstellen = document.getElementById('btn-challenge-erstellen');
