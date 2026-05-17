@@ -1,24 +1,31 @@
-// Die Master Liste mit allen Spielern
-const alleSpieler = [
-	{ name: "Spieler 5", punkte: 120 },
-	{ name: "Marvin", punkte: 500 },
-	{ name: "Spieler 3", punkte: 200 },
-	{ name: "Spieler 4", punkte: 600 },
-	{ name: "Spieler 2", punkte: 350 },
-	{ name: "Spieler 6", punkte: 95 },
-	{ name: "Spieler 7", punkte: 70 }
-];
+//Firebase Module direkt aus dem Internet laden
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+// Exakte Firebase Konfiguration
+const firebaseConfig = {
+    apiKey: "AIzaSyCG-yi8KlJPlDvVTNJEoM3aTa-_O7jP9Rk",
+    authDomain: "basketball-leaderboard-sieglar.firebaseapp.com",
+    projectId: "basketball-leaderboard-sieglar",
+    storageBucket: "basketball-leaderboard-sieglar.firebasestorage.app",
+    messagingSenderId: "158682616904",
+    appId: "1:158682616904:web:df76d3f6b67f3a7e35f47d",
+    measurementId: "G-9DPK112PLB"
+  };
 
-//Die HTML aus der index greifen
-const podiumContainer = document.querySelector('.podium-container');
-const listeContainer = document.querySelector('.liste-container');
+//Firebase & Datenbank-Verbindung 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-function rankingAnzeigen() {
-	//Liste nach Punkten sortieren
-	alleSpieler.sort((a, b) => b.punkte - a.punkte);
+function liveRankingLaden() {
+	const rankingQuery = query(collection(db, "leaderboard"), orderBy("punkte", "desc"));
 	
-	//Podium befüllen
+	onSnapshot(rankingQuery, (snapshot) => {
+		const alleSpieler = [];
+		snapshot.forEach((doc) => {
+		alleSpieler.push(doc.data());
+	});
+		//Podium befüllen
 	const p1 = alleSpieler[0];
 	const p2 = alleSpieler[1];
 	const p3 = alleSpieler[2];
@@ -43,7 +50,6 @@ function rankingAnzeigen() {
 		`;
 	}
 	
-	//Untere Liste befüllen ab Platz 4
 	if (listeContainer) {
 		listeContainer.innerHTML = "";
 		
@@ -61,43 +67,42 @@ function rankingAnzeigen() {
 			}
 		});
 	}
+});
 }
 
-//Beim allerersten Laden der Seite die Maschine einmal starten
-rankingAnzeigen();
+liveRankingLaden();
 
 //Den Button aktivieren
 const btnSpeichern = document.getElementById('btn-speichern');
 
-btnSpeichern.addEventListener('click', () => {
+btnSpeichern.addEventListener('click', async () => {
 	//Werte aus den Eingabefeldern holen
-	const nameInput = document.getElementById('input-name').value.trim();
-	const punkteInput = document.getElementById('input-punkte').value;
+	const nameInput = document.getElementById('input-name');
+	const punkteInput = document.getElementById('input-punkte');
 	
+	const name = nameInput.value.trim();
+	
+	const punkte = parseInt(punkteInput.value, 10);
 	//Sicherheitsprüfung
-	if (nameInput !== "" && punkteInput !=="") {
-		const neuePunkte = parseInt(punkteInput);
+	if (!name || isNaN(punkte)) {
+		alert("Bitte gib einen gültigen Namen und Punkte ein!");
+		return;
+	}
+	
+	try {
+		await addDoc(collection(db, "leaderboard"), {
+			name: name,
+			punkte: punkte,
+			eingetragenAm: new Date()
+		});
 		
-		//Suche nach Namen, ignoriere groß und kleinschreibung
-		const bestehenderSpieler = alleSpieler.find(
-			spieler => spieler.name.toLowerCase() === nameInput.toLowerCase()
-		);
+		nameInput.value = "";
+		punkteInput.value ="";
 		
-		if (bestehenderSpieler) {
-			bestehenderSpieler.punkte = neuePunkte;
-		} else {
-			alleSpieler.push({
-				name: nameInput,
-				punkte: neuePunkte
-			});
-		}
-		
-		//Eingabefelder wieder leer machen
-		document.getElementById('input-name').value = "";
-		document.getElementById('input-punkte').value = "";
-		
-		//Die Maschine neu sortieren und eintragen lassen
-		rankingAnzeigen()
+		console.log("Spieler erfolgreich ins Leaderboard eingetragen!");
+	} catch (fehler) {
+		console.error("Fehler beim Speichern des Spielers:", fehler);
+		alert("Fehler beim Eintragen ins Leaderboard!");
 	}
 });
 
