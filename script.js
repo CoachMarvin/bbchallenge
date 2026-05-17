@@ -111,42 +111,37 @@ btnSpeichern.addEventListener('click', async () => {
 });
 
 //Admin Bereich
-//Hintergrundprüfung wer angemeldet ist
-const aktuellEingeloggt = localStorage.getItem('angemeldeterUser');
-const authBereich = document.getElementById('nav-auth-bereich');
 
-if (aktuellEingeloggt && aktuellEingeloggt.toLowerCase() === "admin") {
-	const formContainer = document.querySelector('.form-container');
-	if (formContainer) {
-		//Formular als Admin anzeigen
-		formContainer.style.display = "flex";
-	}
-	
-	if (authBereich) {
-		authBereich.innerHTML =`
-			<a href="profil.html" class="btn-login-nav" style="background-color: #e50914; border-color: #e50914;">Admin-Modus aktiv.</a>
-		`;
-	}
-	console.log("Admin-Modus über Login aktiv.");
-	
-} else if (aktuellEingeloggt) {
-	if (authBereich) {
-		authBereich.innerHTML = `
-			<a href="profil.html" class="btn-login-nav">
-				Angemeldet als ${aktuellEingeloggt} (Profil)
-			</a>
-		`;
-	}
-}
 
 //prüfen ob Admin eingeloggt
 const auth = getAuth(app);
 const adminForm = document.getElementById('admin-eintrag-form');
+const authBereich = document.getElementById('nav-auth-bereich');
 
 onAuthStateChanged(auth, (user) => {
 	if (user) {
-		if (adminForm) adminForm.style.display = "block";
+		console.log("Hintergrund-Check: Admin ist eingeloggt!");
+		
+		if (adminForm){
+			adminForm.style.display = "flex";
+		}
+		
+		if (authBereich) {
+			authBereich.innerHTML = `
+				<a href="profil.html" class="btn-login-nav" style="background-color: #e50914; border-color: #e50914;">Admin-Modus aktiv</a>
+			`;
+		}
 	} else {
-		if (adminForm) adminForm.style.display = "none";
+		console.log("Hintergrund-Check: Kein Admin eingeloggt.");
+		
+		if (adminForm) {
+			adminForm.style.display = "none";
+		}
+		
+		if (authBereich) {
+			authBereich.innerHTML = `
+				<a href="login.html" class="btn-login-nav">Admin Login</a>
+			`;
+		}
 	}
 });
