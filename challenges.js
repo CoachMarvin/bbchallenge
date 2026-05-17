@@ -21,7 +21,7 @@ const listeContainer = document.getElementById('challenges-liste');
 const deineTelefonnummer = "4915755821997"; //Telefonnumer für Einsendungen
 
 //Challenges live laden und anzeigen
-async function cloudChallengesLaden () {
+async function cloudChallengesLaden() {
 	if (!listeContainer) return;
 	listeContainer.innerHTML = '<p class="loading-text">Lade Challenges aus der Cloud...</p>';
 	
