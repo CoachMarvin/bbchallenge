@@ -13,9 +13,6 @@ const firebaseConfig = {
     measurementId: "G-9DPK112PLB"
   };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
   
 //Firebase & Datenbank-Verbindung 
 const app = initializeApp(firebaseConfig);
