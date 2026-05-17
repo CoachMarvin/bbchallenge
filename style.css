@@ -267,3 +267,77 @@ body {
 	background-color: #1a1a1a;
 	border-color: #1a1a1a;
 }
+
+/*============================================================
+                     Challenges
+==============================================================*/
+
+.challenges-nav-container {
+	text-align: center;
+	margin-top: -10px;
+	margin-bottom: 25px;
+}
+
+.btn-challenges-gray {
+	background-color: #1a1a1a;
+	border-color: #333333;
+}
+
+.btn-challenges-gray:hover {
+	background-color: #3a3a3a;
+	border-color: #444444;
+}
+
+/*Hauptcontainer*/
+.challenges-container {
+	max-width: 500px;
+	margin: 20px auto;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	padding: 0 10px;
+}
+
+.challenge-card {
+	background-color: #1e1e1e;
+	border-radius: 5px;
+	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 8px;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/*Titel der Challenge*/
+.challenge-card h3 {
+	color: #ffffff;
+	font-family: 'Changa', sans-serif;
+	margin: 0;
+	font-size: 1.4em;
+	text-transform: uppercase;
+	font-style: italic;
+}
+
+/*Beschreibungstext*/
+.challenge-card p {
+	color: #aaaaaa;
+	font-family: 'Changa', sans-serif;
+	margin: 0;
+	font-size: 1em;
+}
+
+/*WhatsApp Button*/
+.btn-whatsapp {
+	background-color: #25D366;
+	border-color: #25D366;
+	font-size: 0.9em;
+	margin-top: 5px;
+	align-self: flex-end; /*Schiebt den Button nach unten rechts*/
+}
+
+.btn-whatsapp:hover {
+	background-color: #1ebd59;
+	border-color: #1ebd59;
+	transform: scale(1.05);
+}
