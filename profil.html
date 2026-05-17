@@ -17,15 +17,17 @@
 			<p style="color: #e50914; font-family: 'Changa', sans-serif; font-size: 3em; font-weight: bold; margin: 10px 0;">---</p>
 		</div>
 		
-		<div style="text-align: center; margin-top: 30px;">
-			<button id="btn-logout" style="background-color: #2a2a2a; color: #ffffff; border: none; padding: 10px 20px; font-family: 'Changa', sans-serif; font-weight: bold; cursor: pointer; border-radius: 5px;">Abmelden</button>
+		<div class="profile-nav-container">
+			<a href="index.html" class="btn-login-nav">Zum Leaderboard</a>
+			
+			<button id="btn-logout" class="btn-login-nav btn-logout-gray">Abmelden</button>
 		</div>
 	</div>
 	
 	<script>
 		const angemeldeterUser = localStorage.getItem('angemeldeterUser');
 		
-		if (!angemeldeterUSer) {
+		if (!angemeldeterUser) {
 			window.location.href = "login.html";
 		} else {
 			document.getElementById('welcome-message').innerText = "Hi, " + angemeldeterUser + "!";

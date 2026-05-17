@@ -102,15 +102,30 @@ btnSpeichern.addEventListener('click', () => {
 });
 
 //Admin Bereich
-//Pop Up Fenster - Code eingeben
-const adminCode = prompt("Bitte den Admin Code eingeben (Für Zuschauer einfach abbrechen)");
+//Hintergrundprüfung wer angemeldet ist
+const aktuellEingeloggt = localStorage.getItem('angemeldeterUser');
+const authBereich = document.getElementById('nav-auth-bereich');
 
-if (adminCode === "1234") {
+if (aktuellEingeloggt && aktuellEingeloggt.toLowerCase() === "admin") {
 	const formContainer = document.querySelector('.form-container');
 	if (formContainer) {
+		//Formular als Admin anzeigen
 		formContainer.style.display = "flex";
 	}
-	alert("Willkommen zurück, Chef! Admin-Modus aktiv.");
-} else {
-	console.log("Als normaler Zuschauer angemeldet");
+	
+	if (authBereich) {
+		authBereich.innerHTML =`
+			<a href="profil.html" class="btn-login-nav" style="background-color: #e50914; border-color: #e50914;">Admin-Modus aktiv.</a>
+		`;
+	}
+	console.log("Admin-Modus über Login aktiv.");
+	
+} else if (aktuellEingeloggt) {
+	if (authBereich) {
+		authBereich.innerHTML = `
+			<a href="profil.html" class="btn-login-nav">
+				Angemeldet als ${aktuellEingeloggt} (Profil)
+			</a>
+		`;
+	}
 }

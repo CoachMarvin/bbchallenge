@@ -134,10 +134,10 @@ body {
 
 /* Das Formular Gehäuse */
 .form-container {
-	max-width: 340px;
-	margin: 20px auto;
+	max-width: 500px;
+	margin: 30px auto;
 	display: none;
-	gap: 10px;
+	gap: 15px;
 	justify-content: center;
 }
 
@@ -176,4 +176,94 @@ body {
 /* Maus Hover */
 .form-container button:hover {
 	background-color: #b20710;
+}
+
+/* Die Box für den Login-Bereich */
+.login-box {
+	background-color: #1e1e1e;
+	max-width: 300px;
+	margin: 40px auto;
+	padding: 30px;
+	border-radius: 5px;
+	border-top: 4px solid #e50914;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.login-box input {
+	background-color: #2a2a2a;
+	border: 1px solid #333333;
+	border-radius: 5px;
+	color: #ffffff;
+	padding: 10px;
+	font-family: 'Changa', sans-serif;
+}
+
+.login-box input:focus {
+	outline: none;
+	border-color: #e50914;
+}
+
+.login-box button {
+	background-color: #e50914;
+	color: white;
+	border: none;
+	padding: 10px;
+	font-family: 'Changa', sans-serif;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 5px;
+	text-transform: uppercase;
+}
+
+.login-box button:hover {
+	background-color: #b20710;
+}
+
+.login-nav-container {
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+/* Login Navigationsbutton */
+.btn-login-nav {
+	background-color: #1e1e1e;
+	color: #ffffff;
+	padding: 10px 20px;
+	font-family: 'Changa', sans-serif;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: none;
+	border-radius: 5px;
+	border: 1px solid #2a2a2a;
+	transition: all 0.2s ease;
+	display: inline-block;
+}
+
+/* Hover-Effekt */
+.btn-login-nav:hover {
+	background-color: #e50914;
+	border-color: #e50914;
+	transform: scale(1.05); /* Wird minimal größer */
+}
+
+.profile-nav-container {
+	text-align: center;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	align-items: center; 
+}
+
+.btn-logout-gray {
+	background-color: #2a2a2a;
+	border-color: #333333;
+}
+
+.btn-logout-gray:hover {
+	background-color: #1a1a1a;
+	border-color: #1a1a1a;
 }
