@@ -67,7 +67,7 @@ cloudChallengesLaden();
 
 //Admin Schutz
 const aktuellEingeloggt = localStorage.getItem('angemeldeterUser');
-const adminForm = document.getElementById('achallenge-admin-form');
+const adminForm = document.querySelector('#challenge-admin-form');
 
 if (aktuellEingeloggt && aktuellEingeloggt.toLowerCase() === "admin") {
 	if (adminForm) {
@@ -79,8 +79,8 @@ if (aktuellEingeloggt && aktuellEingeloggt.toLowerCase() === "admin") {
 const btnErstellen = document.getElementById('btn-challenge-erstellen');
 if (btnErstellen) {
 	btnErstellen.addEventListener('click', async () => {
-		const titelInput = document.getElementById('challenge-titel').value.trim();
-		const beschreibungsInput = document.getElementById('challenge-beschreibung').value.trim();
+		const titelInput = document.querySelector('#challenge-titel').value.trim();
+		const beschreibungsInput = document.querySelector('#challenge-beschreibung').value.trim();
 		
 		if (titelInput !== "" && beschreibungsInput !== "") {
 			btnErstellen.innerText = "Speichert...";
@@ -94,8 +94,8 @@ if (btnErstellen) {
 				});
 				
 				//Felder leeren, aktualisieren und zurücksetzen
-				document.getElementById('challenge-titel').value = "";
-				document.getElementById('challenge-beschreibung').value = "";
+				document.querySelector('#challenge-titel').value = "";
+				document.querySelector('#challenge-beschreibung').value = "";
 				btnErstellen.innerText = "Erstellen";
 				btnErstellen.diabled = false;
 				
