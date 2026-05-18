@@ -39,26 +39,34 @@ function liveRankingLaden() {
 			if (!vollerName) return "";
 			if (vollerName.startsWith("Coach ")) {
 				const nameOhneCoach = vollerName.replace("Coach ", "");
-				return `<div style="font-size: 0.8em; font-weight: bold; color: #ffdddd; margin-bottom: 2px;">Coach</div><div>${nameOhneCoach}</div>`;
+				return `<div class="title-coach">Coach</div><div>${nameOhneCoach}</div>`;
 			}
 			return `<div>${vollerName}</div>`;
 		};
 		
 		podiumContainer.innerHTML = `
-			<div class="podium-platz rank-2">
-				<span class="spieler-name">${formatierePodiumName(p2.spielerName)}</span>
-				<div class="stufe">2</div>
-				<span class="spieler-punkte">${p2.punkte}</span>
+			<div class="podium-spalte">
+				<div class="stufe rank-2-bg">2</div>
+				<div class="podium-platz rank-2">
+					<span class="spieler-name">${formatierePodiumName(p2.spielerName)}</span>
+					<span class="spieler-punkte">${p2.punkte}</span>
+				</div>
 			</div>
-			<div class="podium-platz rank-1">
-				<span class="spieler-name">${formatierePodiumName(p1.spielerName)}</span>
-				<div class="stufe">1</div>
-				<span class="spieler-punkte">${p1.punkte}</span>
+			
+			<div class="podium-spalte">
+				<div class="stufe rank-1-bg">1</div>
+				<div class="podium-platz rank-1">
+					<span class="spieler-name">${formatierePodiumName(p1.spielerName)}</span>
+					<span class="spieler-punkte">${p1.punkte}</span>
+				</div>
 			</div>
-			<div class="podium-platz rank-3">
-				<span class="spieler-name">${formatierePodiumName(p3.spielerName)}</span>
-				<div class="stufe">3</div>
-				<span class="spieler-punkte">${p3.punkte}</span>
+			
+			<div class="podium-spalte">
+				<div class="stufe rank-3-bg">3</div>
+				<div class="podium-platz rank-3">
+					<span class="spieler-name">${formatierePodiumName(p3.spielerName)}</span>
+					<span class="spieler-punkte">${p3.punkte}</span>
+				</div>
 			</div>
 		`;
 	}
