@@ -35,19 +35,28 @@ function liveRankingLaden() {
 	const p3 = alleSpieler[2];
 	
 	if (p1 && p2 && p3) {
+		const formatierePodiumName = (vollerName) => {
+			if (!vollerName) return "";
+			if (vollerName.startsWith("Coach ")) {
+				const nameOhneCoach = vollerName.replace("Coach ", "");
+				return `<span class="title-coach">Coach</span><br>${nameOhneCoach}`;
+			}
+			return vollerName;
+		};
+		
 		podiumContainer.innerHTML = `
 			<div class="podium-platz rank-2">
-				<span class="spieler-name">${p2.spielerName}</span>
+				<span class="spieler-name">${formatierePodiumName(p2.spielerName)}</span>
 				<div class="stufe">2</div>
 				<span class="spieler-punkte">${p2.punkte}</span>
 			</div>
 			<div class="podium-platz rank-1">
-				<span class="spieler-name">${p1.spielerName}</span>
+				<span class="spieler-name">${formatierePodiumName(p1.spielerName)}</span>
 				<div class="stufe">1</div>
 				<span class="spieler-punkte">${p1.punkte}</span>
 			</div>
 			<div class="podium-platz rank-3">
-				<span class="spieler-name">${p3.spielerName}</span>
+				<span class="spieler-name">${formatierePodiumName(p3.spielerName)}</span>
 				<div class="stufe">3</div>
 				<span class="spieler-punkte">${p3.punkte}</span>
 			</div>

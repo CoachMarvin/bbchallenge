@@ -121,6 +121,14 @@ body {
 	text-align: left; /* Name linksbündig */
 }
 
+/*Styling für Coach Titel in Podium*/
+.spieler-name .title-coach {
+	font-size: 0.85em;
+	opacity: 0.9;
+	display: inline-block;
+	margin-bottom: 2px;
+}
+
 /* Die Punkte rechts außen */
 .liste-punkte {
 	font-size: 1.1em;
