@@ -23,10 +23,25 @@
 	<h1 class="main-title">Leaderboard</h1>
 	
 	
-	<div class="form-container" id="admin-eintrag-form" style="display: none;">
-		<input type="text" id="input-name" placeholder="Spielername">
-		<input type="number" id="input-punkte" placeholder="Punkte">
-		<button id="btn-speichern">Eintragen</button>
+	<div class="form-container" id="admin-eintrag-form">
+		<div class="admin-section border-bottom">
+			<h3 class="admin-title">Punkte hinzufügen</h3>
+			<div class="admin-row">
+				<select id="admin-spieler-select" class="admin-input">
+					<option value="">-- Spieler auswählen --</option>
+				</select>
+				<input type="number" id="admin-punkte-add" placeholder="+ Punkte" class="admin-input punkte-width">
+			</div>
+			<button id="btn-punkte-buchen" class="login-btn full-width">Punkte buchen</button>
+		</div>
+		
+		<div class="admin section">
+			<h3 class="admin-title">Neuen Spieler anlegen</h3>
+			<div class="admin-row">
+				<input type="text" id="admin-neu-name" placeholder="Name" class="admin-input">
+			</div>
+			<button id="btn-spieler-anlegen" class="login-btn full-width btn-secondary">Spieler erstellen</button>
+		</div>
 	</div>
 	
 	<div id="leaderboard">

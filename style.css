@@ -393,3 +393,58 @@ body {
 	transform: translateY(-2px);
 	box-shadow: 0 6px 12px rgba(229, 9, 20, 0.4);
 }
+
+/* ADMIN-FORMULAR */
+#admin-eintrag-form {
+	display: none; /*Wird per js auf flex geschaltet, wenn Admin einloggt*/
+	flex-direction: column;
+	gap: 15px;
+}
+
+.admin-section {
+	width: 100%;
+}
+
+.admin-section.border-bottom {
+	border-bottom: 1px solid #444;
+	padding-bottom: 15px;
+}
+
+.admin-title {
+	margin-top: 0;
+	color: #ffffff;
+}
+
+.admin-row {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.admin-input {
+	flex: 1;
+	padding: 10px;
+	border-radius: 5px;
+	background-color: #222222;
+	color: #ffffff;
+	border: 1px solid #444444;
+	font-size: 1rem;
+}
+
+.admin-input.punkte-width {
+	width: 100px;
+	flex: none; /*Punktefeld skaliert nicht mit*/
+}
+
+.full-width {
+	width: 100%;
+}
+
+.btn-secondary {
+	background-color: #555555 !important;
+	border-color: #555555 !important;
+}
+
+.btn-secondary:hover {
+	background-color: #666666 !important;
+}
