@@ -155,7 +155,7 @@ if (btnPunkteBuchen) {
 		try {
 			const gewaehlteOption = spielerSelect.options[spielerSelect.selectedIndex];
 			const vollerText = gewaehlteOption.textContent;
-			const spielerName = collerText.split(' (')[0];
+			const spielerName = vollerText.split(' (')[0];
 			
 			const spielerRef = doc(db, "leaderboard", ausgewaehlteId);
 			
@@ -180,7 +180,7 @@ if (btnPunkteBuchen) {
 			alert(`Erfolgreich! ${punkteDazu} Punkte auf das Konto von ${spielerName} gebucht.`);
 		} catch (error) {
 			console.error("Fehler beim Punkte buchen:", error);
-			alert("Fehler beim Buchen. Bist du einmmgeloggt?");
+			alert("Fehler beim Buchen. Bist du eingeloggt?");
 		}
 	});
 }
