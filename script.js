@@ -39,9 +39,9 @@ function liveRankingLaden() {
 			if (!vollerName) return "";
 			if (vollerName.startsWith("Coach ")) {
 				const nameOhneCoach = vollerName.replace("Coach ", "");
-				return `<span class="title-coach">Coach</span><br>${nameOhneCoach}`;
+				return `<div style="font-size: 0.8em; font-weight: bold; color: #ffdddd; margin-bottom: 2px;">Coach</div><div>${nameOhneCoach}</div>`;
 			}
-			return vollerName;
+			return `<div>${vollerName}</div>`;
 		};
 		
 		podiumContainer.innerHTML = `

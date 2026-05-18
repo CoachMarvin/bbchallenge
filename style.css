@@ -34,23 +34,25 @@ body {
 	background-color: #1e1e1e; /* helleres schwarz, dunkelgrau für die Säulen */
 	border: 2px solid #e50914; /* Ein agressiver, roter Rand */
 	border-radius: 10px 10px 0 0; /* Oben abgerundet, unten flach */
-	padding: 15px 5px; /* Innenabstand, damit der Text nicht am Rand klebt */
+	padding: 15px 5px 15px 5px; /* Innenabstand, damit der Text nicht am Rand klebt */
 	display: flex; /* Wir aktivieren Flexbox auch innerhalb der Säule */
 	flex-direction: column; /* Der Text wird untereinander gestapelt */
 	align-items: center; /* Alles wird mittig in der Säule zentriert */
+	justify-content: space-between; 
+	box-sizing: border-box;
 }
 
 .rank-1 {
-	height: 260px; /* Platz 1 ist die höchste Säule */
+	min-height: 280px; /* Platz 1 ist die höchste Säule */
 	background-color: #e50914; /* Zum Hervorheben, Säule rot */
 }
 
 .rank-2 {
-	height: 180px;
+	min-height: 200px;
 }
 
 .rank-3 {
-	height: 130px;
+	min-height: 140px;
 }
 
 .stufe {
