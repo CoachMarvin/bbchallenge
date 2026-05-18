@@ -49,16 +49,16 @@ body {
 	box-sizing: border-box;
 }
 
-.rank-1-bg {
+.rank-1 {
 	height: 220px; /* Platz 1 ist die höchste Säule */
 	background-color: #e50914; /* Zum Hervorheben, Säule rot */
 }
 
-.rank-2-bg {
+.rank-2 {
 	height: 150px;
 }
 
-.rank-3-bg {
+.rank-3 {
 	height: 110px;
 }
 
