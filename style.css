@@ -41,16 +41,16 @@ body {
 }
 
 .rank-1 {
-	height: 220px; /* Platz 1 ist die höchste Säule */
+	height: 260px; /* Platz 1 ist die höchste Säule */
 	background-color: #e50914; /* Zum Hervorheben, Säule rot */
 }
 
 .rank-2 {
-	height: 170px;
+	height: 180px;
 }
 
 .rank-3 {
-	height: 120px;
+	height: 130px;
 }
 
 .stufe {
