@@ -25,12 +25,12 @@ body {
 	display: flex; /* Aktiviert die Felxbox-Magie */
 	justify-content: center; /* Schiebt das gesamte Treppchen in die Mitte des Bildschirms */
 	align-items: flex-end; /* Richtet die Elemente nach unten aus (Wichtig für die Stufenhöhe!) */
-	gap: 15px; /* Ein bisschen Abstand zu den Plätzen */
+	gap: 18px; /* Ein bisschen Abstand zu den Plätzen */
 	margin-top: 50px; /* Abstand nach oben zur Überschrift */
 }
 
 .podium-platz {
-	width: 100px; /* Jede Säule ist 100 Pixel breit */
+	width: 115px; /* Jede Säule ist 100 Pixel breit */
 	background-color: #1e1e1e; /* helleres schwarz, dunkelgrau für die Säulen */
 	border: 2px solid #e50914; /* Ein agressiver, roter Rand */
 	border-radius: 10px 10px 0 0; /* Oben abgerundet, unten flach */
