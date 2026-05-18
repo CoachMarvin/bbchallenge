@@ -134,7 +134,7 @@ if (btnSpielerAnlegen) {
 //Punkte draufrechnen + Historie speichern
 if (btnPunkteBuchen) {
 	btnPushing = btnPunkteBuchen.addEventListener('click', async () => {
-		const ausgewaehlteId = spieler.Select.value;
+		const ausgewaehlteId = spielerSelect.value;
 		const punkteDazuInput = document.getElementById('admin-punkte-add').value;
 		const punkteDazu = parseInt(punkteDazuInput);
 		
