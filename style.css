@@ -27,13 +27,13 @@ body {
 	align-items: flex-end; /* Richtet die Elemente nach unten aus (Wichtig für die Stufenhöhe!) */
 	gap: 18px; /* Ein bisschen Abstand zu den Plätzen */
 	margin-top: 60px; /* Abstand nach oben zur Überschrift */
+	height: 320px;
 }
 
 .podium-spalte {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: flex-end;
 }
 
 .podium-platz {
