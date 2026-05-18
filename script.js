@@ -76,75 +76,11 @@ function liveRankingLaden() {
 
 liveRankingLaden();
 
-//Den Button aktivieren
-const btnSpeichern = document.getElementById('btn-speichern');
-
-btnSpeichern.addEventListener('click', async () => {
-	//Werte aus den Eingabefeldern holen
-	const nameInput = document.getElementById('input-name');
-	const punkteInput = document.getElementById('input-punkte');
-	
-	const name = nameInput.value.trim();
-	
-	const punkte = parseInt(punkteInput.value, 10);
-	//Sicherheitsprüfung
-	if (!name || isNaN(punkte)) {
-		alert("Bitte gib einen gültigen Namen und Punkte ein!");
-		return;
-	}
-	
-	try {
-		await addDoc(collection(db, "leaderboard"), {
-			name: name,
-			punkte: punkte,
-			eingetragenAm: new Date()
-		});
-		
-		nameInput.value = "";
-		punkteInput.value ="";
-		
-		console.log("Spieler erfolgreich ins Leaderboard eingetragen!");
-	} catch (fehler) {
-		console.error("Fehler beim Speichern des Spielers:", fehler);
-		alert("Fehler beim Eintragen ins Leaderboard!");
-	}
-});
 
 //Admin Bereich
 
 
-//prüfen ob Admin eingeloggt
-const auth = getAuth(app);
-const adminForm = document.getElementById('admin-eintrag-form');
-const authBereich = document.getElementById('nav-auth-bereich');
 
-onAuthStateChanged(auth, (user) => {
-	if (user) {
-		console.log("Hintergrund-Check: Admin ist eingeloggt!");
-		
-		if (adminForm){
-			adminForm.style.display = "flex";
-		}
-		
-		if (authBereich) {
-			authBereich.innerHTML = `
-				<a href="profil.html" class="btn-login-nav" style="background-color: #e50914; border-color: #e50914;">Admin-Modus aktiv</a>
-			`;
-		}
-	} else {
-		console.log("Hintergrund-Check: Kein Admin eingeloggt.");
-		
-		if (adminForm) {
-			adminForm.style.display = "none";
-		}
-		
-		if (authBereich) {
-			authBereich.innerHTML = `
-				<a href="login.html" class="btn-login-nav">Admin Login</a>
-			`;
-		}
-	}
-});
 
 //Admin Formular Logik
 
@@ -239,3 +175,36 @@ if (btnPunkteBuchen) {
 		}
 	});
 }
+
+//prüfen ob Admin eingeloggt
+const auth = getAuth(app);
+const adminForm = document.getElementById('admin-eintrag-form');
+const authBereich = document.getElementById('nav-auth-bereich');
+
+onAuthStateChanged(auth, (user) => {
+	if (user) {
+		console.log("Hintergrund-Check: Admin ist eingeloggt!");
+		
+		if (adminForm){
+			adminForm.style.display = "flex";
+		}
+		
+		if (authBereich) {
+			authBereich.innerHTML = `
+				<a href="profil.html" class="btn-login-nav" style="background-color: #e50914; border-color: #e50914;">Admin-Modus aktiv</a>
+			`;
+		}
+	} else {
+		console.log("Hintergrund-Check: Kein Admin eingeloggt.");
+		
+		if (adminForm) {
+			adminForm.style.display = "none";
+		}
+		
+		if (authBereich) {
+			authBereich.innerHTML = `
+				<a href="login.html" class="btn-login-nav">Admin Login</a>
+			`;
+		}
+	}
+});
